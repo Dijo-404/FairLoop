@@ -1,13 +1,13 @@
 {
   "report_type": "FairLoop Fairness Compliance Report",
-  "generated_at": "2026-04-28T17:55:13.416917+00:00",
+  "generated_at": "2026-04-28T18:27:52.967086+00:00",
   "system": "FairLoop v1.0 \u2014 In-Loop Bias Prevention",
   "summary": {
-    "total_batches_evaluated": 26,
-    "batches_approved": 21,
+    "total_batches_evaluated": 5,
+    "batches_approved": 5,
     "batches_remediated": 0,
-    "batches_rejected": 5,
-    "approval_rate_percent": 80.77
+    "batches_rejected": 0,
+    "approval_rate_percent": 100.0
   },
   "fairness_metrics_applied": [
     "Demographic Parity Difference (threshold \u2264 0.10)",
@@ -20,730 +20,145 @@
   ],
   "audit_trail": [
     {
-      "id": "1b1c979b-18ef-4e8b-8cde-852045a0e8a7",
-      "iteration": 11,
-      "batch_id": "batch_56197374",
-      "timestamp": "2026-04-28T17:55:13.147765+00:00",
-      "sample_count": 613,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.05464987427012741,
-        "disparate_impact_ratio": 1.198498393465376,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6044354838709678,
-        "representation_balance": 0.9398734177212216,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.11639496228103823,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.12. sex_demographic_parity_diff=0.055 (threshold: \u22640.10). sex_disparate_impact_ratio=1.198 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:13"
-    },
-    {
-      "id": "a3e6702a-7325-43b5-ba6e-a77a964ea795",
-      "iteration": 10,
-      "batch_id": "batch_ccc6bcf1",
-      "timestamp": "2026-04-28T17:55:12.746103+00:00",
-      "sample_count": 684,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.008771929824561403,
-        "disparate_impact_ratio": 0.9638554212895921,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.705983078162772,
-        "representation_balance": 0.9999999999997077,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.002631578947368421,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.00. sex_demographic_parity_diff=-0.009 (threshold: \u22640.10). sex_disparate_impact_ratio=0.964 (threshold: \u22650.80)",
-      "remediation_applied": "balanced_resampling",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:12"
-    },
-    {
-      "id": "0587f48b-9334-4937-938f-50ea3c12003d",
-      "iteration": 9,
-      "batch_id": "batch_1f43ba30",
-      "timestamp": "2026-04-28T17:55:12.413027+00:00",
-      "sample_count": 650,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.009230769230769237,
-        "disparate_impact_ratio": 1.0468749994683837,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6793993146543036,
-        "representation_balance": 0.9999999999996924,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.10276923076923078,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.10. sex_demographic_parity_diff=0.009 (threshold: \u22640.10). sex_disparate_impact_ratio=1.047 (threshold: \u22650.80)",
-      "remediation_applied": "balanced_resampling",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:12"
-    },
-    {
-      "id": "654715bb-f2fe-47a2-9855-3847d1d19162",
-      "iteration": 8,
-      "batch_id": "batch_bc8a248a",
-      "timestamp": "2026-04-28T17:55:12.102894+00:00",
-      "sample_count": 664,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.0030120481927710663,
-        "disparate_impact_ratio": 1.01492537263141,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7653698851038098,
-        "representation_balance": 0.9999999999996988,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.0009036144578313198,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.00. sex_demographic_parity_diff=0.003 (threshold: \u22640.10). sex_disparate_impact_ratio=1.015 (threshold: \u22650.80)",
-      "remediation_applied": "balanced_resampling",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:12"
-    },
-    {
-      "id": "eee8fc33-0462-4079-8562-3d0975631708",
-      "iteration": 7,
-      "batch_id": "batch_10698da1",
-      "timestamp": "2026-04-28T17:55:11.787976+00:00",
-      "sample_count": 624,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.0399924165025331,
-        "disparate_impact_ratio": 1.1535878969762758,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6164549304295222,
-        "representation_balance": 0.7285318559554769,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.01199772495075993,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, representation_balance. Semantic bias score: 0.01. sex_demographic_parity_diff=0.040 (threshold: \u22640.10). sex_disparate_impact_ratio=1.154 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:11"
-    },
-    {
-      "id": "c30f977e-fcd7-49da-9150-951e380a84fc",
-      "iteration": 6,
-      "batch_id": "batch_152aa946",
-      "timestamp": "2026-04-28T17:55:11.443129+00:00",
-      "sample_count": 624,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.04448693163004816,
-        "disparate_impact_ratio": 1.2074203181621397,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6557327412192169,
-        "representation_balance": 0.6729222520105435,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.013346079489014447,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, representation_balance. Semantic bias score: 0.01. sex_demographic_parity_diff=0.044 (threshold: \u22640.10). sex_disparate_impact_ratio=1.207 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:11"
-    },
-    {
-      "id": "cd99de9e-1528-4ef0-a74f-4ed47f9efa24",
+      "id": "26d422c0-db7c-4699-b1d7-4be724d5c277",
       "iteration": 5,
-      "batch_id": "batch_c8010f62",
-      "timestamp": "2026-04-28T17:55:11.062513+00:00",
-      "sample_count": 658,
+      "batch_id": "batch_ef262b44",
+      "timestamp": "2026-04-28T18:27:52.752656+00:00",
+      "sample_count": 310,
       "protected_attributes": [
         "sex"
       ],
       "metrics": {
-        "demographic_parity_diff": -0.04255319148936171,
-        "disparate_impact_ratio": 0.8292682923502082,
+        "demographic_parity_diff": -0.10322580645161292,
+        "disparate_impact_ratio": 0.609756097330458,
         "equal_opportunity_diff": 0.0,
         "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.759346971681951,
-        "representation_balance": 0.9999999999996961,
+        "individual_fairness_score": 0.6727327873824689,
+        "representation_balance": 0.999999999999355,
         "proxy_variable_count": 1
       },
-      "semantic_bias_score": 0.11276595744680852,
+      "semantic_bias_score": 0.2260896932702549,
       "flagged_proxies": [
         "relationship"
       ],
       "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.11. sex_demographic_parity_diff=-0.043 (threshold: \u22640.10). sex_disparate_impact_ratio=0.829 (threshold: \u22650.80)",
+      "reason": "Batch has fixable bias issues. Failed metrics: disparate_impact_ratio, proxy_variable_penalty, demographic_parity_diff, individual_fairness_score. Proxy variables detected: relationship. Semantic bias score: 0.23. sex_demographic_parity_diff=-0.103 (threshold: \u22640.10). sex_disparate_impact_ratio=0.610 (threshold: \u22650.80)",
       "remediation_applied": "balanced_resampling",
       "final_verdict": "APPROVE",
       "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:11"
+      "created_at": "2026-04-28 18:27:52"
     },
     {
-      "id": "eb93155e-b769-4620-842a-c9da5b88674a",
+      "id": "205696e0-995c-49cb-9f00-904831c4392c",
       "iteration": 4,
-      "batch_id": "batch_a9c2232b",
-      "timestamp": "2026-04-28T17:55:10.705321+00:00",
-      "sample_count": 621,
+      "batch_id": "batch_a9a30e4e",
+      "timestamp": "2026-04-28T18:27:52.637440+00:00",
+      "sample_count": 346,
       "protected_attributes": [
         "sex"
       ],
       "metrics": {
-        "demographic_parity_diff": 0.004208294853496747,
-        "disparate_impact_ratio": 1.01744160716389,
+        "demographic_parity_diff": -0.06936416184971098,
+        "disparate_impact_ratio": 0.7272727269867768,
         "equal_opportunity_diff": 0.0,
         "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6286434694906706,
-        "representation_balance": 0.8052325581393008,
+        "individual_fairness_score": 0.6505256773150021,
+        "representation_balance": 0.999999999999422,
         "proxy_variable_count": 1
       },
-      "semantic_bias_score": 0.10126248845604903,
+      "semantic_bias_score": 0.1571728850615249,
       "flagged_proxies": [
         "relationship"
       ],
       "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.10. sex_demographic_parity_diff=0.004 (threshold: \u22640.10). sex_disparate_impact_ratio=1.017 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
+      "reason": "Batch has fixable bias issues. Failed metrics: disparate_impact_ratio, proxy_variable_penalty, individual_fairness_score. Proxy variables detected: relationship. Semantic bias score: 0.16. sex_demographic_parity_diff=-0.069 (threshold: \u22640.10). sex_disparate_impact_ratio=0.727 (threshold: \u22650.80)",
+      "remediation_applied": "balanced_resampling",
       "final_verdict": "APPROVE",
       "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:10"
+      "created_at": "2026-04-28 18:27:52"
     },
     {
-      "id": "93123cf7-acbb-45d6-87e1-0e3af0fdad95",
+      "id": "61515abc-0464-4c5d-a56a-2c1a3e80e07e",
       "iteration": 3,
-      "batch_id": "batch_9066fcff",
-      "timestamp": "2026-04-28T17:55:10.322639+00:00",
-      "sample_count": 704,
+      "batch_id": "batch_688bd2d2",
+      "timestamp": "2026-04-28T18:27:52.507228+00:00",
+      "sample_count": 352,
       "protected_attributes": [
         "sex"
       ],
       "metrics": {
-        "demographic_parity_diff": -0.019886363636363646,
-        "disparate_impact_ratio": 0.9195402295130135,
+        "demographic_parity_diff": -0.04545454545454544,
+        "disparate_impact_ratio": 0.7999999996480001,
         "equal_opportunity_diff": 0.0,
         "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6861144699717856,
-        "representation_balance": 0.9999999999997159,
+        "individual_fairness_score": 0.7146176381452671,
+        "representation_balance": 0.9999999999994319,
         "proxy_variable_count": 0
       },
-      "semantic_bias_score": 0.005965909090909094,
+      "semantic_bias_score": 0.013636363812363625,
       "flagged_proxies": [],
       "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.01. sex_demographic_parity_diff=-0.020 (threshold: \u22640.10). sex_disparate_impact_ratio=0.920 (threshold: \u22650.80)",
+      "reason": "Batch has fixable bias issues. Failed metrics: disparate_impact_ratio, individual_fairness_score. Semantic bias score: 0.01. sex_demographic_parity_diff=-0.045 (threshold: \u22640.10). sex_disparate_impact_ratio=0.800 (threshold: \u22650.80)",
       "remediation_applied": "balanced_resampling",
       "final_verdict": "APPROVE",
       "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:10"
+      "created_at": "2026-04-28 18:27:52"
     },
     {
-      "id": "5e1142e2-819f-437c-8a18-9b63340abd13",
+      "id": "b065b44b-74e9-4749-a683-a93253d6e352",
       "iteration": 2,
-      "batch_id": "batch_b163bc6f",
-      "timestamp": "2026-04-28T17:55:09.988292+00:00",
-      "sample_count": 610,
+      "batch_id": "batch_4aa6e895",
+      "timestamp": "2026-04-28T18:27:52.284502+00:00",
+      "sample_count": 320,
       "protected_attributes": [
         "sex"
       ],
       "metrics": {
-        "demographic_parity_diff": -0.03082699338010078,
-        "disparate_impact_ratio": 0.88675136083576,
+        "demographic_parity_diff": 0.04375000000000001,
+        "disparate_impact_ratio": 1.2499999992857143,
         "equal_opportunity_diff": 0.0,
         "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6482695994349712,
-        "representation_balance": 0.7478510028651153,
-        "proxy_variable_count": 1
+        "individual_fairness_score": 0.7930267812026276,
+        "representation_balance": 0.999999999999375,
+        "proxy_variable_count": 0
       },
-      "semantic_bias_score": 0.10924809801403024,
-      "flagged_proxies": [
-        "relationship"
-      ],
+      "semantic_bias_score": 0.013125000000000003,
+      "flagged_proxies": [],
       "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty, representation_balance. Proxy variables detected: relationship. Semantic bias score: 0.11. sex_demographic_parity_diff=-0.031 (threshold: \u22640.10). sex_disparate_impact_ratio=0.887 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:09"
-    },
-    {
-      "id": "838d521d-606d-40fa-8263-7bf13f9eaa85",
-      "iteration": 1,
-      "batch_id": "batch_dbe9992b",
-      "timestamp": "2026-04-28T17:55:09.578547+00:00",
-      "sample_count": 722,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.013850415512465353,
-        "disparate_impact_ratio": 0.9342105258720396,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7262468513853904,
-        "representation_balance": 0.999999999999723,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.1041551246537396,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.10. sex_demographic_parity_diff=-0.014 (threshold: \u22640.10). sex_disparate_impact_ratio=0.934 (threshold: \u22650.80)",
+      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.01. sex_demographic_parity_diff=0.044 (threshold: \u22640.10). sex_disparate_impact_ratio=1.250 (threshold: \u22650.80)",
       "remediation_applied": "balanced_resampling",
       "final_verdict": "APPROVE",
       "approved_batch_id": null,
-      "created_at": "2026-04-28 17:55:09"
+      "created_at": "2026-04-28 18:27:52"
     },
     {
-      "id": "6ddd041d-a852-491c-a9d5-38d88c523bd8",
-      "iteration": 3,
-      "batch_id": "batch_62b310e5",
-      "timestamp": "2026-04-28T17:54:23.333111+00:00",
-      "sample_count": 624,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.05208333333333334,
-        "disparate_impact_ratio": 1.2499999994,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6389505549949546,
-        "representation_balance": 0.8571428571426021,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.115625,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.12. sex_demographic_parity_diff=0.052 (threshold: \u22640.10). sex_disparate_impact_ratio=1.250 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:54:23"
-    },
-    {
-      "id": "e66bb553-357f-46f5-a4fa-204b07701de7",
-      "iteration": 2,
-      "batch_id": "batch_f22293e7",
-      "timestamp": "2026-04-28T17:54:22.989405+00:00",
-      "sample_count": 648,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.025113553113553122,
-        "disparate_impact_ratio": 1.129007977743077,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6492484616160596,
-        "representation_balance": 0.7279999999998059,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.10753406593406595,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, representation_balance, proxy_variable_penalty. Proxy variables detected: relationship. Semantic bias score: 0.11. sex_demographic_parity_diff=0.025 (threshold: \u22640.10). sex_disparate_impact_ratio=1.129 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:54:22"
-    },
-    {
-      "id": "13391262-183e-450b-9be8-5a4f1bf77306",
+      "id": "c73d2c4d-16bf-4e4d-8c7b-9926d01ad4cc",
       "iteration": 1,
-      "batch_id": "batch_434fb402",
-      "timestamp": "2026-04-28T17:54:22.662798+00:00",
-      "sample_count": 662,
+      "batch_id": "batch_a65862d8",
+      "timestamp": "2026-04-28T18:27:52.127543+00:00",
+      "sample_count": 366,
       "protected_attributes": [
         "sex"
       ],
       "metrics": {
-        "demographic_parity_diff": -0.018126888217522646,
-        "disparate_impact_ratio": 0.9178082187619253,
+        "demographic_parity_diff": -0.08196721311475408,
+        "disparate_impact_ratio": 0.6153846150958581,
         "equal_opportunity_diff": 0.0,
         "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6639451668178611,
-        "representation_balance": 0.9999999999996979,
-        "proxy_variable_count": 0
+        "individual_fairness_score": 0.7550196751084653,
+        "representation_balance": 0.9999999999994537,
+        "proxy_variable_count": 1
       },
-      "semantic_bias_score": 0.005438066465256794,
-      "flagged_proxies": [],
+      "semantic_bias_score": 0.21689785638649722,
+      "flagged_proxies": [
+        "relationship"
+      ],
       "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.01. sex_demographic_parity_diff=-0.018 (threshold: \u22640.10). sex_disparate_impact_ratio=0.918 (threshold: \u22650.80)",
+      "reason": "Batch has fixable bias issues. Failed metrics: disparate_impact_ratio, proxy_variable_penalty, individual_fairness_score. Proxy variables detected: relationship. Semantic bias score: 0.22. sex_demographic_parity_diff=-0.082 (threshold: \u22640.10). sex_disparate_impact_ratio=0.615 (threshold: \u22650.80)",
       "remediation_applied": "balanced_resampling",
       "final_verdict": "APPROVE",
       "approved_batch_id": null,
-      "created_at": "2026-04-28 17:54:22"
-    },
-    {
-      "id": "5efe88f5-997c-4f04-9ff3-da65b6bc4c5d",
-      "iteration": 5,
-      "batch_id": "batch_6b0b2bc5",
-      "timestamp": "2026-04-28T17:53:54.398014+00:00",
-      "sample_count": 364,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.06043956043956045,
-        "disparate_impact_ratio": 0.7380952377753968,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7344712655287344,
-        "representation_balance": 0.9999999999994507,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.1490842492441698,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: proxy_variable_penalty, disparate_impact_ratio, individual_fairness_score. Proxy variables detected: relationship. Semantic bias score: 0.15. sex_demographic_parity_diff=-0.060 (threshold: \u22640.10). sex_disparate_impact_ratio=0.738 (threshold: \u22650.80)",
-      "remediation_applied": "balanced_resampling",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:54"
-    },
-    {
-      "id": "6d5f1ade-12c8-4823-9920-4af579272ff5",
-      "iteration": 4,
-      "batch_id": "batch_5dafd95e",
-      "timestamp": "2026-04-28T17:53:54.198589+00:00",
-      "sample_count": 306,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.0031878688665833987,
-        "disparate_impact_ratio": 0.9906601032059044,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.5367283015055067,
-        "representation_balance": 0.832335329340819,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.10095636065997503,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: proxy_variable_penalty, individual_fairness_score. Proxy variables detected: relationship. Semantic bias score: 0.10. sex_demographic_parity_diff=-0.003 (threshold: \u22640.10). sex_disparate_impact_ratio=0.991 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:54"
-    },
-    {
-      "id": "810d3cff-497e-45f9-96f6-27436ede56a4",
-      "iteration": 3,
-      "batch_id": "batch_001d910f",
-      "timestamp": "2026-04-28T17:53:53.976906+00:00",
-      "sample_count": 316,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.020329301075268813,
-        "disparate_impact_ratio": 1.0952006289127747,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7480545730166751,
-        "representation_balance": 0.645833333332997,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.006098790322580643,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score, representation_balance. Semantic bias score: 0.01. sex_demographic_parity_diff=0.020 (threshold: \u22640.10). sex_disparate_impact_ratio=1.095 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:53"
-    },
-    {
-      "id": "49044c25-46b3-4f13-9cb6-6e3d4c8e6aa7",
-      "iteration": 2,
-      "batch_id": "batch_d3a1777c",
-      "timestamp": "2026-04-28T17:53:53.759761+00:00",
-      "sample_count": 315,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.03881110292311474,
-        "disparate_impact_ratio": 1.1461609616405162,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7191420477539457,
-        "representation_balance": 0.7796610169487121,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.011643330876934421,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.01. sex_demographic_parity_diff=0.039 (threshold: \u22640.10). sex_disparate_impact_ratio=1.146 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:53"
-    },
-    {
-      "id": "8d6d2ac7-f878-4d4e-adb2-c815d1dc4815",
-      "iteration": 1,
-      "batch_id": "batch_3af6003c",
-      "timestamp": "2026-04-28T17:53:53.529950+00:00",
-      "sample_count": 338,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.03754578754578752,
-        "disparate_impact_ratio": 0.8101851847755916,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7029483037156705,
-        "representation_balance": 0.8571428571423862,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.11126373626373626,
-      "flagged_proxies": [
-        "_is_synthetic"
-      ],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: proxy_variable_penalty, individual_fairness_score. Proxy variables detected: _is_synthetic. Semantic bias score: 0.11. sex_demographic_parity_diff=-0.038 (threshold: \u22640.10). sex_disparate_impact_ratio=0.810 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:53"
-    },
-    {
-      "id": "8c2410f5-bad7-4553-9a5f-2efc16155fb5",
-      "iteration": 2,
-      "batch_id": "batch_b5c88a60",
-      "timestamp": "2026-04-28T17:53:15.851760+00:00",
-      "sample_count": 340,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.0,
-        "disparate_impact_ratio": 0.9999999995952381,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7210946177925881,
-        "representation_balance": 0.9999999999994118,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.0,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: individual_fairness_score. Semantic bias score: 0.00. sex_demographic_parity_diff=0.000 (threshold: \u22640.10). sex_disparate_impact_ratio=1.000 (threshold: \u22650.80)",
-      "remediation_applied": "balanced_resampling",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:15"
-    },
-    {
-      "id": "f751c7ee-56a1-4082-8508-30364ea17408",
-      "iteration": 1,
-      "batch_id": "batch_48dd9845",
-      "timestamp": "2026-04-28T17:53:15.632944+00:00",
-      "sample_count": 325,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": 0.021120075937351684,
-        "disparate_impact_ratio": 1.0899898883121115,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6517342501769643,
-        "representation_balance": 0.6581632653057867,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.006336022781205505,
-      "flagged_proxies": [],
-      "verdict": "APPROVE",
-      "reason": "Batch has fixable bias issues. Failed metrics: representation_balance, individual_fairness_score. Semantic bias score: 0.01. sex_demographic_parity_diff=0.021 (threshold: \u22640.10). sex_disparate_impact_ratio=1.090 (threshold: \u22650.80)",
-      "remediation_applied": "reweighting + disparate_impact_removal",
-      "final_verdict": "APPROVE",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:53:15"
-    },
-    {
-      "id": "c7f41272-4d86-4d45-ac93-f2b77dd12c60",
-      "iteration": 5,
-      "batch_id": "batch_18d24ab8",
-      "timestamp": "2026-04-28T17:52:10.438032+00:00",
-      "sample_count": 256,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.24520123839009286,
-        "disparate_impact_ratio": 0.22352941169392157,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7066331658291457,
-        "representation_balance": 0.49707602339152224,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.36179566567006705,
-      "flagged_proxies": [],
-      "verdict": "REJECT",
-      "reason": "Extreme disparate impact: 0.224 (far below 0.80 threshold). Batch is severely biased.",
-      "remediation_applied": null,
-      "final_verdict": "REJECT",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:52:10"
-    },
-    {
-      "id": "225d1a30-b80f-491b-83ae-ab22b9093c82",
-      "iteration": 4,
-      "batch_id": "batch_330acac6",
-      "timestamp": "2026-04-28T17:52:10.420406+00:00",
-      "sample_count": 256,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.2229697907555675,
-        "disparate_impact_ratio": 0.33507223103972356,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6528643216080402,
-        "representation_balance": 0.5329341317362079,
-        "proxy_variable_count": 1
-      },
-      "semantic_bias_score": 0.39935482170680847,
-      "flagged_proxies": [
-        "relationship"
-      ],
-      "verdict": "REJECT",
-      "reason": "Extreme disparate impact: 0.335 (far below 0.80 threshold). Batch is severely biased.",
-      "remediation_applied": null,
-      "final_verdict": "REJECT",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:52:10"
-    },
-    {
-      "id": "949d7199-75d4-4792-b009-b02e92206859",
-      "iteration": 3,
-      "batch_id": "batch_e1f28ddf",
-      "timestamp": "2026-04-28T17:52:10.404231+00:00",
-      "sample_count": 256,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.1883936080740118,
-        "disparate_impact_ratio": 0.3929539294126769,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6528643216080402,
-        "representation_balance": 0.47126436781582115,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.26004111771586513,
-      "flagged_proxies": [],
-      "verdict": "REJECT",
-      "reason": "Extreme disparate impact: 0.393 (far below 0.80 threshold). Batch is severely biased.",
-      "remediation_applied": null,
-      "final_verdict": "REJECT",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:52:10"
-    },
-    {
-      "id": "45db3104-895e-415c-82dc-0bf549bb41cc",
-      "iteration": 2,
-      "batch_id": "batch_ae5088d0",
-      "timestamp": "2026-04-28T17:52:10.388498+00:00",
-      "sample_count": 256,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.18778173989100452,
-        "disparate_impact_ratio": 0.39693171983795167,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.6928643216080401,
-        "representation_balance": 0.5329341317362079,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.25786866204832554,
-      "flagged_proxies": [],
-      "verdict": "REJECT",
-      "reason": "Extreme disparate impact: 0.397 (far below 0.80 threshold). Batch is severely biased.",
-      "remediation_applied": null,
-      "final_verdict": "REJECT",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:52:10"
-    },
-    {
-      "id": "9a998ff5-33ac-4106-aef5-415157bba0a3",
-      "iteration": 1,
-      "batch_id": "batch_3125442e",
-      "timestamp": "2026-04-28T17:52:10.371090+00:00",
-      "sample_count": 256,
-      "protected_attributes": [
-        "sex"
-      ],
-      "metrics": {
-        "demographic_parity_diff": -0.19115528666090464,
-        "disparate_impact_ratio": 0.319487179373442,
-        "equal_opportunity_diff": 0.0,
-        "predictive_parity_diff": 0.0,
-        "individual_fairness_score": 0.7167839195979899,
-        "representation_balance": 0.43820224719076506,
-        "proxy_variable_count": 0
-      },
-      "semantic_bias_score": 0.2976029963115504,
-      "flagged_proxies": [],
-      "verdict": "REJECT",
-      "reason": "Extreme disparate impact: 0.319 (far below 0.80 threshold). Batch is severely biased.",
-      "remediation_applied": null,
-      "final_verdict": "REJECT",
-      "approved_batch_id": null,
-      "created_at": "2026-04-28 17:52:10"
+      "created_at": "2026-04-28 18:27:52"
     }
   ],
   "compliance_standards": [

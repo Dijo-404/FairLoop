@@ -1,135 +1,69 @@
 {
-  "iterations_completed": 11,
-  "total_approved": 11,
-  "total_remediated": 11,
+  "iterations_completed": 5,
+  "total_approved": 5,
+  "total_remediated": 5,
   "total_rejected": 0,
   "final_evaluation": {
-    "eval_accuracy": 0.8025184275184275,
-    "eval_sex_disparate_impact": 0.8869672350180589,
-    "eval_sex_demographic_parity_diff": -0.01659755111591149,
-    "eval_sex_equal_opportunity_diff": 0.09848206756287514
+    "eval_accuracy": 0.8014434889434889,
+    "eval_sex_disparate_impact": 0.6348498348126312,
+    "eval_sex_demographic_parity_diff": -0.014110018029235356,
+    "eval_sex_equal_opportunity_diff": 0.009201845329629435
   },
   "training_history": [
     {
       "iteration": 1,
-      "batch_id": "batch_dbe9992b",
-      "train_accuracy": 0.8573407202216067,
-      "train_loss": 0.29912356476133944,
-      "batch_size": 722,
-      "eval_accuracy": 0.8144963144963145,
-      "eval_sex_disparate_impact": 0.7423244138201752,
-      "eval_sex_demographic_parity_diff": -0.015327774841382424,
-      "eval_sex_equal_opportunity_diff": -0.006652115680341297
+      "batch_id": "batch_a65862d8",
+      "train_accuracy": 0.8989071038251366,
+      "train_loss": 0.25273074221184544,
+      "batch_size": 366,
+      "eval_accuracy": 0.807585995085995,
+      "eval_sex_disparate_impact": 0.5687196443148871,
+      "eval_sex_demographic_parity_diff": -0.029088698406198883,
+      "eval_sex_equal_opportunity_diff": -0.06360434545364353
     },
     {
       "iteration": 2,
-      "batch_id": "batch_b163bc6f",
-      "train_accuracy": 0.8065573770491803,
-      "train_loss": 0.3897190281079672,
-      "batch_size": 610,
-      "eval_accuracy": 0.7954545454545454,
-      "eval_sex_disparate_impact": 0.8003320207737499,
-      "eval_sex_demographic_parity_diff": -0.029599491922359375,
-      "eval_sex_equal_opportunity_diff": -0.013145493328042102
+      "batch_id": "batch_4aa6e895",
+      "train_accuracy": 0.8625,
+      "train_loss": 0.30444163766396093,
+      "batch_size": 320,
+      "eval_accuracy": 0.8048218673218673,
+      "eval_sex_disparate_impact": 1.3603925015039584,
+      "eval_sex_demographic_parity_diff": 0.009452918208274229,
+      "eval_sex_equal_opportunity_diff": 0.08649734609851678
     },
     {
       "iteration": 3,
-      "batch_id": "batch_9066fcff",
-      "train_accuracy": 0.8068181818181818,
-      "train_loss": 0.41460404506840026,
-      "batch_size": 704,
-      "eval_accuracy": 0.7992936117936118,
-      "eval_sex_disparate_impact": 1.9916146249352864,
-      "eval_sex_demographic_parity_diff": 0.04063994384405025,
-      "eval_sex_equal_opportunity_diff": 0.21761000049605636
+      "batch_id": "batch_688bd2d2",
+      "train_accuracy": 0.8238636363636364,
+      "train_loss": 0.33606828489174717,
+      "batch_size": 352,
+      "eval_accuracy": 0.7945331695331695,
+      "eval_sex_disparate_impact": 1.1765708735500593,
+      "eval_sex_demographic_parity_diff": 0.020014122552839436,
+      "eval_sex_equal_opportunity_diff": 0.2243117218115978
     },
     {
       "iteration": 4,
-      "batch_id": "batch_a9c2232b",
-      "train_accuracy": 0.8244766505636071,
-      "train_loss": 0.37822478037573626,
-      "batch_size": 621,
-      "eval_accuracy": 0.7913083538083538,
-      "eval_sex_disparate_impact": 1.3922913634179952,
-      "eval_sex_demographic_parity_diff": 0.02664273910672764,
-      "eval_sex_equal_opportunity_diff": 0.11219802569571904
+      "batch_id": "batch_a9a30e4e",
+      "train_accuracy": 0.8294797687861272,
+      "train_loss": 0.3482724681751541,
+      "batch_size": 346,
+      "eval_accuracy": 0.7988329238329238,
+      "eval_sex_disparate_impact": 1.4941769596245793,
+      "eval_sex_demographic_parity_diff": 0.020947548086665678,
+      "eval_sex_equal_opportunity_diff": 0.06175901582419761
     },
     {
       "iteration": 5,
-      "batch_id": "batch_c8010f62",
-      "train_accuracy": 0.8693009118541033,
-      "train_loss": 0.332965435684808,
-      "batch_size": 658,
-      "eval_accuracy": 0.8069717444717445,
-      "eval_sex_disparate_impact": 0.8162355025498504,
-      "eval_sex_demographic_parity_diff": -0.010242611251663473,
-      "eval_sex_equal_opportunity_diff": 0.034976933379631925
-    },
-    {
-      "iteration": 6,
-      "batch_id": "batch_152aa946",
-      "train_accuracy": 0.8461538461538461,
-      "train_loss": 0.35750120230610183,
-      "batch_size": 624,
-      "eval_accuracy": 0.8026719901719902,
-      "eval_sex_disparate_impact": 1.3082368816460377,
-      "eval_sex_demographic_parity_diff": 0.022594413235088276,
-      "eval_sex_equal_opportunity_diff": 0.17677464159928571
-    },
-    {
-      "iteration": 7,
-      "batch_id": "batch_10698da1",
-      "train_accuracy": 0.8189102564102564,
-      "train_loss": 0.3723793202695794,
-      "batch_size": 624,
-      "eval_accuracy": 0.8049754299754299,
-      "eval_sex_disparate_impact": 0.9789287543869164,
-      "eval_sex_demographic_parity_diff": -0.0019393440533815726,
-      "eval_sex_equal_opportunity_diff": 0.0760752021429634
-    },
-    {
-      "iteration": 8,
-      "batch_id": "batch_bc8a248a",
-      "train_accuracy": 0.8825301204819277,
-      "train_loss": 0.2980857551602055,
-      "batch_size": 664,
-      "eval_accuracy": 0.8040540540540541,
-      "eval_sex_disparate_impact": 0.7962012192602143,
-      "eval_sex_demographic_parity_diff": -0.020093509684185454,
-      "eval_sex_equal_opportunity_diff": 0.07796021628056946
-    },
-    {
-      "iteration": 9,
-      "batch_id": "batch_1f43ba30",
-      "train_accuracy": 0.8107692307692308,
-      "train_loss": 0.35562245889145444,
-      "batch_size": 650,
-      "eval_accuracy": 0.8031326781326781,
-      "eval_sex_disparate_impact": 0.9436177096274484,
-      "eval_sex_demographic_parity_diff": -0.0029049422667533006,
-      "eval_sex_equal_opportunity_diff": 0.027119400763926785
-    },
-    {
-      "iteration": 10,
-      "batch_id": "batch_ccc6bcf1",
-      "train_accuracy": 0.8654970760233918,
-      "train_loss": 0.34222497374355243,
-      "batch_size": 684,
-      "eval_accuracy": 0.8121928746928747,
-      "eval_sex_disparate_impact": 1.0862986073281948,
-      "eval_sex_demographic_parity_diff": 0.005456820712520391,
-      "eval_sex_equal_opportunity_diff": 0.10348231559105114
-    },
-    {
-      "iteration": 11,
-      "batch_id": "batch_56197374",
-      "train_accuracy": 0.765089722675367,
-      "train_loss": 0.43782302142467644,
-      "batch_size": 613,
-      "eval_accuracy": 0.8025184275184275,
-      "eval_sex_disparate_impact": 0.8869672350180589,
-      "eval_sex_demographic_parity_diff": -0.01659755111591149,
-      "eval_sex_equal_opportunity_diff": 0.09848206756287514
+      "batch_id": "batch_ef262b44",
+      "train_accuracy": 0.8258064516129032,
+      "train_loss": 0.4099094984089682,
+      "batch_size": 310,
+      "eval_accuracy": 0.8014434889434889,
+      "eval_sex_disparate_impact": 0.6348498348126312,
+      "eval_sex_demographic_parity_diff": -0.014110018029235356,
+      "eval_sex_equal_opportunity_diff": 0.009201845329629435
     }
   ],
   "config": {
@@ -137,7 +71,7 @@
     "protected_attributes": [
       "sex"
     ],
-    "batch_size": 512,
-    "max_iterations": 20
+    "batch_size": 256,
+    "max_iterations": 5
   }
 }
