@@ -23,42 +23,24 @@ Tested on the UCI Adult Income dataset (32,561 records):
 
 ## Architecture
 
-```
-                      ┌─────────────────────┐
-                      │  Orchestrator Agent  │
-                      │   (State Machine)   │
-                      └────────┬────────────┘
-                               │ coordinates
-           ┌───────────────────┼────────────────────┐
-           │                   │                    │
-    ┌──────▼──────┐   ┌────────▼──────┐   ┌────────▼──────┐
-    │ Data Agent  │   │  Synth Agent  │   │ Feature Agent │
-    └──────┬──────┘   └───────┬───────┘   └───────┬───────┘
-           │                  │                    │
-           └──────────────────▼────────────────────┘
-                         raw batch
-                              │
-                    ┌─────────▼──────────┐
-                    │  Neutral Validator  │◄──── Gemini 1.5 Pro
-                    │      Agent         │      (independent LLM)
-                    └────┬──────────┬────┘
-                         │          │
-                    APPROVE      REMEDIATE / REJECT
-                         │          │
-                         │    ┌─────▼──────────┐
-                         │    │ Remediation    │
-                         │    │ Agent          │
-                         │    └─────┬──────────┘
-                         │          │ re-validate
-                         └──────────▼
-                    ┌────────────────────────┐
-                    │    Learner Agent       │
-                    │  (only clean batches)  │
-                    └────────────┬───────────┘
-                                 │
-                    ┌────────────▼───────────┐
-                    │  Audit Log + Dashboard  │
-                    └─────────────────────────┘
+```mermaid
+graph TD
+    O[Orchestrator Agent<br/>State Machine] -->|coordinates| D[Data Agent]
+    O -->|coordinates| S[Synth Agent]
+    O -->|coordinates| F[Feature Agent]
+    
+    D -->|raw batch| V[Neutral Validator Agent]
+    S -->|raw batch| V
+    F -->|raw batch| V
+    
+    Gemini[Gemini 1.5 Pro<br/>independent LLM] -.-> V
+    
+    V -->|APPROVE| L[Learner Agent<br/>only clean batches]
+    V -->|REMEDIATE / REJECT| R[Remediation Agent]
+    
+    R -->|re-validate| V
+    
+    L --> A[Audit Log + Dashboard]
 ```
 
 ### Agent Network
