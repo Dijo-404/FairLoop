@@ -1,0 +1,23 @@
+# FairLoop - Core Dependencies
+datasets>=2.14.0
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+scipy>=1.10.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-dotenv>=1.0.0
+
+# Optional: LangGraph (for graph-based orchestration)
+# langgraph>=0.2.0
+# langchain>=0.2.0
+
+# Optional: Gemini (for semantic bias analysis)
+# google-generativeai>=0.3.0
+
+# Optional: SDV (for CTGAN synthetic data)
+# sdv>=1.0.0
+
+# Optional: Fairness libraries (for production metrics)
+# aif360>=0.5.0
+# fairlearn>=0.10.0

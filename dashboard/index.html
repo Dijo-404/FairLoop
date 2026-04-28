@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairLoop — Live Fairness Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/recharts@2/umd/Recharts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a3e 0%, #16213e 100%);
+            padding: 20px 32px;
+            border-bottom: 2px solid #7c3aed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #7c3aed, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        .status-dot.running { background: #22c55e; }
+        .status-dot.idle { background: #6b7280; }
+        .status-dot.completed { background: #06b6d4; }
+        .status-dot.error { background: #ef4444; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 24px 32px;
+        }
+        .card {
+            background: #1a1a3e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #2d2d5e;
+        }
+        .card h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+        .card .value {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .card .value.green { color: #22c55e; }
+        .card .value.yellow { color: #eab308; }
+        .card .value.red { color: #ef4444; }
+        .card .value.blue { color: #06b6d4; }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            padding: 0 32px 24px;
+        }
+        .chart-card {
+            background: #1a1a3e;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #2d2d5e;
+        }
+        .chart-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #e0e0e0;
+        }
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 32px 24px;
+            max-width: calc(100% - 64px);
+        }
+        .table-container {
+            background: #1a1a3e;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #2d2d5e;
+            margin: 0 32px 24px;
+            overflow-x: auto;
+        }
+        .table-container h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #9ca3af;
+            border-bottom: 1px solid #2d2d5e;
+        }
+        td {
+            padding: 10px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid #1e1e4a;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge.approve { background: #064e3b; color: #34d399; }
+        .badge.remediate { background: #78350f; color: #fbbf24; }
+        .badge.reject { background: #7f1d1d; color: #f87171; }
+        .threshold-line { stroke: #ef4444; stroke-dasharray: 5,5; }
+        .controls {
+            padding: 0 32px 16px;
+            display: flex;
+            gap: 12px;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        button.primary {
+            background: linear-gradient(135deg, #7c3aed, #06b6d4);
+            color: white;
+        }
+        button.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.4); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .footer-note {
+            text-align: center;
+            padding: 16px;
+            color: #6b7280;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const {
+            LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+            ResponsiveContainer, ReferenceLine, BarChart, Bar, PieChart, Pie, Cell
+        } = Recharts;
+
+        const API_BASE = window.location.origin.replace(':3000', ':8000');
+
+        function App() {
+            const [status, setStatus] = useState('idle');
+            const [metrics, setMetrics] = useState([]);
+            const [auditEntries, setAuditEntries] = useState([]);
+            const [summary, setSummary] = useState({});
+            const [pipelineState, setPipelineState] = useState({});
+            const intervalRef = useRef(null);
+
+            const startPipeline = async () => {
+                try {
+                    await fetch(`${API_BASE}/pipeline/start`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            max_iterations: 20,
+                            batch_size: 256,
+                            protected_attributes: ['sex'],
+                        }),
+                    });
+                    setStatus('running');
+                    startPolling();
+                } catch (e) {
+                    console.error('Failed to start pipeline:', e);
+                }
+            };
+
+            const startPolling = () => {
+                if (intervalRef.current) clearInterval(intervalRef.current);
+                intervalRef.current = setInterval(pollStatus, 1000);
+            };
+
+            const pollStatus = async () => {
+                try {
+                    const [statusRes, metricsRes, auditRes] = await Promise.all([
+                        fetch(`${API_BASE}/pipeline/status`).then(r => r.json()),
+                        fetch(`${API_BASE}/pipeline/metrics`).then(r => r.json()),
+                        fetch(`${API_BASE}/audit/entries?limit=20`).then(r => r.json()),
+                    ]);
+
+                    setStatus(statusRes.status);
+                    setPipelineState(statusRes.state || {});
+                    setMetrics(metricsRes.metrics || []);
+                    setAuditEntries(auditRes.entries || []);
+
+                    if (statusRes.status === 'completed' || statusRes.status === 'error') {
+                        clearInterval(intervalRef.current);
+                        if (statusRes.result) setSummary(statusRes.result);
+                    }
+                } catch (e) {
+                    console.error('Polling error:', e);
+                }
+            };
+
+            useEffect(() => {
+                pollStatus();
+                return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+            }, []);
+
+            // Transform metrics for chart
+            const chartData = metrics.map((m, i) => ({
+                iteration: i + 1,
+                accuracy: (m.eval_accuracy || 0) * 100,
+                disparate_impact: m.eval_sex_disparate_impact || 0,
+                demographic_parity: Math.abs(m.eval_sex_demographic_parity_diff || 0),
+                loss: m.train_loss || 0,
+            }));
+
+            const COLORS = ['#22c55e', '#eab308', '#ef4444'];
+            const verdictData = [
+                { name: 'Approved', value: pipelineState.total_approved || 0 },
+                { name: 'Remediated', value: pipelineState.total_remediated || 0 },
+                { name: 'Rejected', value: pipelineState.total_rejected || 0 },
+            ].filter(d => d.value > 0);
+
+            return (
+                <div>
+                    <div className="header">
+                        <h1>🔮 FairLoop — Live Fairness Dashboard</h1>
+                        <div className="status">
+                            <div className={`status-dot ${status}`} />
+                            <span style={{textTransform:'capitalize', fontWeight:600}}>
+                                {status}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="controls">
+                        <button className="primary" onClick={startPipeline} disabled={status === 'running'}>
+                            ▶ Start FairLoop Pipeline
+                        </button>
+                    </div>
+
+                    <div className="grid">
+                        <div className="card">
+                            <h3>Iteration</h3>
+                            <div className="value blue">{pipelineState.iteration || 0}</div>
+                        </div>
+                        <div className="card">
+                            <h3>Approved Batches</h3>
+                            <div className="value green">{pipelineState.total_approved || 0}</div>
+                        </div>
+                        <div className="card">
+                            <h3>Remediated Batches</h3>
+                            <div className="value yellow">{pipelineState.total_remediated || 0}</div>
+                        </div>
+                        <div className="card">
+                            <h3>Rejected Batches</h3>
+                            <div className="value red">{pipelineState.total_rejected || 0}</div>
+                        </div>
+                    </div>
+
+                    <div className="charts-grid">
+                        <div className="chart-card">
+                            <h3>📈 Fairness Metrics Over Training</h3>
+                            <ResponsiveContainer width="100%" height={350}>
+                                <LineChart data={chartData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#2d2d5e" />
+                                    <XAxis dataKey="iteration" stroke="#6b7280" label={{value:'Iteration', position:'insideBottom', offset:-5}} />
+                                    <YAxis stroke="#6b7280" domain={[0, 1.2]} />
+                                    <Tooltip
+                                        contentStyle={{background:'#1a1a3e', border:'1px solid #2d2d5e', borderRadius:8}}
+                                    />
+                                    <Legend />
+                                    <ReferenceLine y={0.8} stroke="#ef4444" strokeDasharray="5 5" label={{value:'80% Rule', fill:'#ef4444', fontSize:12}} />
+                                    <Line type="monotone" dataKey="disparate_impact" name="Disparate Impact Ratio" stroke="#7c3aed" strokeWidth={3} dot={{fill:'#7c3aed'}} />
+                                    <Line type="monotone" dataKey="demographic_parity" name="Demographic Parity Diff" stroke="#06b6d4" strokeWidth={2} dot={{fill:'#06b6d4'}} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        <div className="chart-card">
+                            <h3>🎯 Verdict Distribution</h3>
+                            <ResponsiveContainer width="100%" height={350}>
+                                <PieChart>
+                                    <Pie data={verdictData} cx="50%" cy="50%" outerRadius={120} dataKey="value" label={({name, value}) => `${name}: ${value}`}>
+                                        {verdictData.map((_, i) => (
+                                            <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip contentStyle={{background:'#1a1a3e', border:'1px solid #2d2d5e', borderRadius:8}} />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    <div className="charts-grid">
+                        <div className="chart-card">
+                            <h3>🎓 Model Performance</h3>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart data={chartData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#2d2d5e" />
+                                    <XAxis dataKey="iteration" stroke="#6b7280" />
+                                    <YAxis stroke="#6b7280" />
+                                    <Tooltip contentStyle={{background:'#1a1a3e', border:'1px solid #2d2d5e', borderRadius:8}} />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="accuracy" name="Accuracy (%)" stroke="#22c55e" strokeWidth={2} />
+                                    <Line type="monotone" dataKey="loss" name="Train Loss" stroke="#f97316" strokeWidth={2} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div className="chart-card">
+                            <h3>📊 Summary</h3>
+                            {summary.final_evaluation && (
+                                <div style={{padding:'16px 0'}}>
+                                    {Object.entries(summary.final_evaluation).map(([k,v]) => (
+                                        <div key={k} style={{display:'flex', justifyContent:'space-between', padding:'8px 0', borderBottom:'1px solid #2d2d5e'}}>
+                                            <span style={{color:'#9ca3af', fontSize:13}}>{k.replace(/_/g, ' ')}</span>
+                                            <span style={{fontWeight:600, color: v >= 0.8 ? '#22c55e' : v >= 0.5 ? '#eab308' : '#ef4444'}}>
+                                                {typeof v === 'number' ? v.toFixed(4) : v}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="table-container">
+                        <h3>📋 Audit Log — Recent Decisions</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Iteration</th>
+                                    <th>Batch ID</th>
+                                    <th>Samples</th>
+                                    <th>DI Ratio</th>
+                                    <th>DPD</th>
+                                    <th>Verdict</th>
+                                    <th>Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {auditEntries.map((entry, i) => (
+                                    <tr key={i}>
+                                        <td>{entry.iteration}</td>
+                                        <td style={{fontFamily:'monospace', fontSize:12}}>{(entry.batch_id || '').slice(0,16)}</td>
+                                        <td>{entry.sample_count}</td>
+                                        <td>{(entry.metrics?.sex_disparate_impact_ratio || entry.metrics?.disparate_impact_ratio || 0).toFixed(3)}</td>
+                                        <td>{(entry.metrics?.sex_demographic_parity_diff || entry.metrics?.demographic_parity_diff || 0).toFixed(3)}</td>
+                                        <td>
+                                            <span className={`badge ${entry.verdict?.toLowerCase()}`}>
+                                                {entry.verdict === 'APPROVE' ? '✅' : entry.verdict === 'REMEDIATE' ? '⚠️' : '❌'} {entry.verdict}
+                                            </span>
+                                        </td>
+                                        <td style={{maxWidth:300, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontSize:12}}>
+                                            {entry.reason}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="footer-note">
+                        FairLoop v1.0 — In-Loop Bias Prevention • Google Solution Challenge 2026
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  fairloop-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+    volumes:
+      - ./data:/app/data
+      - fairloop-db:/app/db
+    command: python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+  fairloop-dashboard:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./dashboard:/usr/share/nginx/html:ro
+    depends_on:
+      - fairloop-api
+
+volumes:
+  fairloop-db:
