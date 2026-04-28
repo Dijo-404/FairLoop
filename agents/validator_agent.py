@@ -1,5 +1,5 @@
 """
-FairLoop Neutral Validator Agent ⭐ Core Innovation
+FairLoop Neutral Validator Agent Core Innovation
 An independent evaluator with NO shared weights with the Learner.
 Runs two layers: statistical (fast) + semantic (LLM-powered, on flagged batches).
 """

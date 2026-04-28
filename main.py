@@ -47,14 +47,14 @@ def run_pipeline(args):
 
     with open(output_path, "w") as f:
         json.dump(serializable, f, indent=2, default=str)
-    print(f"\n📁 Results saved to {output_path}")
+    print(f"\nResults saved to {output_path}")
 
     # Generate compliance report
     report = orchestrator.audit_log.export_compliance_report()
     report_path = output_path.replace(".json", "_compliance.json")
     with open(report_path, "w") as f:
         json.dump(report, f, indent=2, default=str)
-    print(f"📋 Compliance report saved to {report_path}")
+    print(f"Compliance report saved to {report_path}")
 
     return result
 
@@ -101,10 +101,10 @@ def run_baseline(args):
     for i, batch in enumerate(batches[:args.iterations]):
         metrics = learner.train_on_batch(batch)
 
-    print("\n📊 BASELINE Results (NO FairLoop):")
+    print("\nBASELINE Results (NO FairLoop):")
     eval_metrics = learner.evaluate()
     for k, v in eval_metrics.items():
-        flag = "⚠️" if "disparate_impact" in k and v < 0.8 else "  "
+        flag = "WARN" if "disparate_impact" in k and v < 0.8 else "    "
         print(f"  {flag} {k}: {v:.4f}")
 
     return eval_metrics
@@ -121,20 +121,20 @@ def run_server(args):
 
 def run_demo(args):
     """Quick demo: run baseline then FairLoop, show comparison."""
-    print("\n" + "🔴" * 25)
+    print("\n" + "-" * 25)
     print("  STEP 1: Training WITHOUT FairLoop (biased baseline)")
-    print("🔴" * 25)
+    print("-" * 25)
     args.iterations = 5
     baseline = run_baseline(args)
 
-    print("\n\n" + "🟢" * 25)
+    print("\n\n" + "-" * 25)
     print("  STEP 2: Training WITH FairLoop (bias prevention)")
-    print("🟢" * 25)
+    print("-" * 25)
     args.iterations = 5
     fairloop = run_pipeline(args)
 
     print("\n\n" + "=" * 70)
-    print("  📊 COMPARISON: Baseline vs FairLoop")
+    print("  COMPARISON: Baseline vs FairLoop")
     print("=" * 70)
 
     fl_eval = fairloop.get("final_evaluation", {})
@@ -147,9 +147,9 @@ def run_demo(args):
         improved = ""
         if isinstance(b_val, float) and isinstance(f_val, float):
             if "disparate_impact" in key:
-                improved = "✅" if f_val > b_val else "⚠️"
+                improved = "OK" if f_val > b_val else "WARN"
             elif "accuracy" in key:
-                improved = "✅" if f_val >= b_val * 0.95 else "⚠️"
+                improved = "OK" if f_val >= b_val * 0.95 else "WARN"
 
         print(f"  {improved} {key:45s} | Baseline: {b_str:>8s} | FairLoop: {f_str:>8s}")
 

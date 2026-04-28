@@ -1,4 +1,4 @@
-# 🔮 FairLoop — In-Loop Bias Prevention System
+# FairLoop — In-Loop Bias Prevention System
 
 > **Every other team builds a bias detector. FairLoop builds a bias firewall.**
 
@@ -8,20 +8,20 @@
 
 FairLoop is an open-source, **hyperagent-powered** bias prevention system that embeds a **Neutral Validator Agent** directly inside the AI model training loop — catching, auditing, and correcting biased training data **before** it ever reaches the learning model.
 
-## 🎯 Key Results
+## Key Results
 
 Tested on the UCI Adult Income dataset (32,561 records):
 
 | Metric | Baseline (No FairLoop) | With FairLoop | Change |
 |--------|----------------------|---------------|--------|
-| **Disparate Impact Ratio** | 0.606 ⚠️ | **0.887** ✅ | +46% improvement |
+| **Disparate Impact Ratio** | 0.606 | **0.887** | +46% improvement |
 | **Demographic Parity Diff** | -0.036 | **-0.017** | 53% closer to fair |
 | **Equal Opportunity Diff** | -0.091 | **0.099** | Within threshold |
 | **Accuracy** | 80.64% | **80.25%** | Only 0.4% cost |
 
 > Disparate Impact Ratio improved from **0.606 → 0.887**, crossing the **0.80 (80% rule) threshold** required by EEOC guidelines — with only **0.4% accuracy cost**.
 
-## 🏗️ Architecture
+## Architecture
 
 ```
                       ┌─────────────────────┐
@@ -40,7 +40,7 @@ Tested on the UCI Adult Income dataset (32,561 records):
                               │
                     ┌─────────▼──────────┐
                     │  Neutral Validator  │◄──── Gemini 1.5 Pro
-                    │      Agent ⭐       │      (independent LLM)
+                    │      Agent         │      (independent LLM)
                     └────┬──────────┬────┘
                          │          │
                     APPROVE      REMEDIATE / REJECT
@@ -65,15 +65,15 @@ Tested on the UCI Adult Income dataset (32,561 records):
 
 | Agent | Role | Technology |
 |-------|------|------------|
-| 🟣 **Orchestrator** | Coordinates all agents, manages training loop state | LangGraph / Python |
-| 🔵 **Data Agent** | Ingests data, validates schema, chunks into batches | HuggingFace Datasets |
-| 🔵 **Synth Agent** | Generates balanced synthetic samples for underrepresented groups | SDV / Statistical Resampling |
-| 🔵 **Feature Agent** | Transforms features, detects proxy variables | scikit-learn |
-| 🟩 **Validator Agent** ⭐ | Independent fairness auditor (statistical + semantic) | Custom + Gemini 1.5 Pro |
-| 🟠 **Remediation Agent** | Repairs biased batches via 5-strategy hierarchy | AIF360 Reweighing + Custom |
-| 🟡 **Learner Agent** | Trains only on validated batches | LogisticRegression / LoRA |
+| **Orchestrator** | Coordinates all agents, manages training loop state | LangGraph / Python |
+| **Data Agent** | Ingests data, validates schema, chunks into batches | HuggingFace Datasets |
+| **Synth Agent** | Generates balanced synthetic samples for underrepresented groups | SDV / Statistical Resampling |
+| **Feature Agent** | Transforms features, detects proxy variables | scikit-learn |
+| **Validator Agent** | Independent fairness auditor (statistical + semantic) | Custom + Gemini 1.5 Pro |
+| **Remediation Agent** | Repairs biased batches via 5-strategy hierarchy | AIF360 Reweighing + Custom |
+| **Learner Agent** | Trains only on validated batches | LogisticRegression / LoRA |
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install
 
@@ -114,7 +114,7 @@ docker-compose up
 # Dashboard: http://localhost:3000
 ```
 
-## ⚖️ Fairness Metrics
+## Fairness Metrics
 
 FairLoop evaluates every batch against **7 statistical metrics**:
 
@@ -130,7 +130,7 @@ FairLoop evaluates every batch against **7 statistical metrics**:
 
 Plus an optional **semantic layer** via Gemini 1.5 Pro for detecting stereotyped language and coded bias.
 
-## 🔧 Remediation Strategies
+## Remediation Strategies
 
 When a batch is flagged, the Remediation Agent applies strategies in order:
 
@@ -142,7 +142,7 @@ When a batch is flagged, the Remediation Agent applies strategies in order:
 
 Max **2 remediation cycles per batch** to prevent infinite loops.
 
-## 📋 Audit Log & Compliance
+## Audit Log & Compliance
 
 Every Validator decision is logged immutably:
 
@@ -166,15 +166,15 @@ Export compliance reports for:
 - **US EEOC** Uniform Guidelines on Employee Selection (80% rule)
 - **IEEE 7010-2020** (Well-being Impact Assessment)
 
-## 📊 Live Dashboard
+## Live Dashboard
 
 The React + Recharts dashboard shows:
-- **📈 Fairness Metrics Over Time** — DI ratio trending toward 0.80+
-- **🎯 Verdict Distribution** — Approve/Remediate/Reject pie chart
-- **🎓 Model Performance** — Accuracy + loss curves
-- **📋 Audit Log** — Real-time batch decisions with verdict badges
+- **Fairness Metrics Over Time** — DI ratio trending toward 0.80+
+- **Verdict Distribution** — Approve/Remediate/Reject pie chart
+- **Model Performance** — Accuracy + loss curves
+- **Audit Log** — Real-time batch decisions with verdict badges
 
-## 🔬 API Reference
+## API Reference
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -186,7 +186,7 @@ The React + Recharts dashboard shows:
 | `GET /audit/compliance-report` | Compliance | Full regulatory report |
 | `WS /ws` | WebSocket | Live event stream |
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 fairloop/
@@ -195,7 +195,7 @@ fairloop/
 │   ├── data_agent.py        # Data ingestion + batching
 │   ├── synth_agent.py       # Synthetic data generation
 │   ├── feature_agent.py     # Feature engineering + proxy detection
-│   ├── validator_agent.py   # Neutral Validator ⭐ (statistical + semantic)
+│   ├── validator_agent.py   # Neutral Validator (statistical + semantic)
 │   ├── remediation_agent.py # 5-strategy bias repair
 │   └── learner_agent.py     # Model training (sklearn / LoRA)
 ├── core/
@@ -216,7 +216,7 @@ fairloop/
 └── .env.example
 ```
 
-## 🔑 Key Design Decisions
+## Key Design Decisions
 
 ### Why a Separate LLM for Validation?
 If the Validator shared weights with the Learner, it would inherit the same biases it is supposed to catch — circular failure. Using Gemini as an independent validator ensures structural independence. Like financial auditing: the auditor cannot be employed by the entity they audit.
@@ -227,7 +227,7 @@ Post-hoc debiasing is a patch — it constrains output while bias stays in the w
 ### Why Multi-Agent?
 Each agent has one well-defined responsibility — auditable, replaceable, extensible. Swap the Remediation Agent's strategies independently. Tune the Validator's thresholds per domain.
 
-## 🔗 References
+## References
 
 - Bellamy et al. (2019) — [AI Fairness 360](https://arxiv.org/abs/1810.01943)
 - Kamiran & Calders (2012) — Reweighing Algorithm
@@ -235,7 +235,7 @@ Each agent has one well-defined responsibility — auditable, replaceable, exten
 - EEOC Uniform Guidelines (1978) — 80% Rule
 - EU AI Act (2024) — Article 10: Data Governance
 
-## 📜 License
+## License
 
 MIT License — see [LICENSE](LICENSE) for details.
 

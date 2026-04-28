@@ -259,7 +259,7 @@
             return (
                 <div>
                     <div className="header">
-                        <h1>🔮 FairLoop — Live Fairness Dashboard</h1>
+                        <h1>FairLoop — Live Fairness Dashboard</h1>
                         <div className="status">
                             <div className={`status-dot ${status}`} />
                             <span style={{textTransform:'capitalize', fontWeight:600}}>
@@ -270,7 +270,7 @@
 
                     <div className="controls">
                         <button className="primary" onClick={startPipeline} disabled={status === 'running'}>
-                            ▶ Start FairLoop Pipeline
+                            Start FairLoop Pipeline
                         </button>
                     </div>
 
@@ -295,7 +295,7 @@
 
                     <div className="charts-grid">
                         <div className="chart-card">
-                            <h3>📈 Fairness Metrics Over Training</h3>
+                            <h3>Fairness Metrics Over Training</h3>
                             <ResponsiveContainer width="100%" height={350}>
                                 <LineChart data={chartData}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#2d2d5e" />
@@ -313,7 +313,7 @@
                         </div>
 
                         <div className="chart-card">
-                            <h3>🎯 Verdict Distribution</h3>
+                            <h3>Verdict Distribution</h3>
                             <ResponsiveContainer width="100%" height={350}>
                                 <PieChart>
                                     <Pie data={verdictData} cx="50%" cy="50%" outerRadius={120} dataKey="value" label={({name, value}) => `${name}: ${value}`}>
@@ -329,7 +329,7 @@
 
                     <div className="charts-grid">
                         <div className="chart-card">
-                            <h3>🎓 Model Performance</h3>
+                            <h3>Model Performance</h3>
                             <ResponsiveContainer width="100%" height={300}>
                                 <LineChart data={chartData}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#2d2d5e" />
@@ -343,7 +343,7 @@
                             </ResponsiveContainer>
                         </div>
                         <div className="chart-card">
-                            <h3>📊 Summary</h3>
+                            <h3>Summary</h3>
                             {summary.final_evaluation && (
                                 <div style={{padding:'16px 0'}}>
                                     {Object.entries(summary.final_evaluation).map(([k,v]) => (
@@ -360,7 +360,7 @@
                     </div>
 
                     <div className="table-container">
-                        <h3>📋 Audit Log — Recent Decisions</h3>
+                        <h3>Audit Log — Recent Decisions</h3>
                         <table>
                             <thead>
                                 <tr>
@@ -383,7 +383,7 @@
                                         <td>{(entry.metrics?.sex_demographic_parity_diff || entry.metrics?.demographic_parity_diff || 0).toFixed(3)}</td>
                                         <td>
                                             <span className={`badge ${entry.verdict?.toLowerCase()}`}>
-                                                {entry.verdict === 'APPROVE' ? '✅' : entry.verdict === 'REMEDIATE' ? '⚠️' : '❌'} {entry.verdict}
+                                                {entry.verdict}
                                             </span>
                                         </td>
                                         <td style={{maxWidth:300, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontSize:12}}>

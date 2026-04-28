@@ -227,7 +227,7 @@ class Orchestrator:
 
             # Check convergence
             if self._check_convergence():
-                print(f"\n✅ Convergence reached at iteration {i + 1}!")
+                print(f"\nConvergence reached at iteration {i + 1}!")
                 break
 
         # === Phase 7: Final Summary ===
